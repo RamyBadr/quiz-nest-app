@@ -127,9 +127,7 @@
         "testEnvironment": "node"
     },
     "husky": {
-        "hooks": {
-            "pre-commit": "lint-staged"
-        }
+        "hooks": {}
     },
     "lint-staged": {
         "*.ts": [
