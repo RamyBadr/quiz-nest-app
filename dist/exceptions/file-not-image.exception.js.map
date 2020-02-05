@@ -1,0 +1,1 @@
+{"version":3,"file":"file-not-image.exception.js","sourceRoot":"","sources":["../../src/exceptions/file-not-image.exception.ts"],"names":[],"mappings":"AAAA,YAAY,CAAC;;AAEb,2CAAqD;AAErD,MAAa,qBAAsB,SAAQ,4BAAmB;IAC1D,YAAY,OAA+B,EAAE,KAAc;QACvD,IAAI,OAAO,EAAE;YACT,KAAK,CAAC,OAAO,EAAE,KAAK,CAAC,CAAC;SACzB;aAAM;YACH,KAAK,CAAC,sBAAsB,CAAC,CAAC;SACjC;IACL,CAAC;CACJ;AARD,sDAQC"}

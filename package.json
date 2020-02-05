@@ -18,7 +18,7 @@
         "schema:drop": "ts-node node_modules/typeorm/cli.js schema:drop -f ormconfig",
         "postinstall": "npm run prestart:prod",
         "prestart:prod": "npm run build",
-        "start:prod": "node dist/src/main.js",
+        "start:prod": "node dist/main.js",
         "lint": "eslint . --ext .ts",
         "lint:fix": "eslint --fix . --ext .ts",
         "test": "jest",
