@@ -32,7 +32,7 @@ export class UserController {
     constructor(private _userService: UserService) {}
 
     @Get('admin')
-    @Roles(RoleType.User)
+    @Roles(RoleType.User, RoleType.Admin)
     @HttpCode(HttpStatus.OK)
     async admin(@AuthUser() user: UserEntity) {
         return 'only for you admin: ' + user.firstName;
@@ -48,7 +48,7 @@ export class UserController {
     })
     getUsers(
         @Query(new ValidationPipe({ transform: true }))
-            pageOptionsDto: UsersPageOptionsDto,
+        pageOptionsDto: UsersPageOptionsDto,
     ): Promise<UsersPageDto> {
         return this._userService.getUsers(pageOptionsDto);
     }

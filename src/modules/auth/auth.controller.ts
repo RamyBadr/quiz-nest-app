@@ -55,15 +55,15 @@ export class AuthController {
     @Post('register')
     @HttpCode(HttpStatus.OK)
     @ApiOkResponse({ type: UserDto, description: 'Successfully Registered' })
-    @ApiImplicitFile({ name: 'avatar', required: true })
+    // @ApiImplicitFile({ name: 'avatar', required: true })
     @UseInterceptors(FileInterceptor('avatar'))
     async userRegister(
         @Body() userRegisterDto: UserRegisterDto,
-        @UploadedFile() file: IFile,
+        // @UploadedFile() file: IFile,
     ): Promise<UserDto> {
         const createdUser = await this.userService.createUser(
             userRegisterDto,
-            file,
+            // null,
         );
 
         return createdUser.toDto();
