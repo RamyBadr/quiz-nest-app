@@ -7,6 +7,7 @@ import {
     IsNotEmpty,
     IsPhoneNumber,
     IsOptional,
+    IsIn,
 } from 'class-validator';
 import { ApiModelProperty } from '@nestjs/swagger';
 import { Column } from 'typeorm';
@@ -27,6 +28,12 @@ export class UserRegisterDto {
     @IsNotEmpty()
     @ApiModelProperty()
     readonly email: string;
+
+    @IsString()
+    @IsIn(['USER', 'TEACHER'])
+    @IsNotEmpty()
+    @ApiModelProperty({})
+    Role: string;
 
     @IsString()
     @MinLength(6)

@@ -65,7 +65,6 @@ export class AuthController {
             userRegisterDto,
             // null,
         );
-
         return createdUser.toDto();
     }
 

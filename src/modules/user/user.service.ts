@@ -10,6 +10,7 @@ import { AwsS3Service } from '../../shared/services/aws-s3.service';
 import { UsersPageOptionsDto } from './dto/users-page-options.dto';
 import { PageMetaDto } from '../../common/dto/PageMetaDto';
 import { UsersPageDto } from './dto/users-page.dto';
+import { RoleType } from 'common/constants/role-type';
 
 @Injectable()
 export class UserService {
@@ -56,8 +57,16 @@ export class UserService {
         // if (file) {
         //     avatar = await this.awsS3Service.uploadImage(file);
         // }
-
-        const user = this.userRepository.create({ ...userRegisterDto, avatar });
+        // if(userRegisterDto.role){
+        //   userRegisterDto.role = RoleType.Admin ;
+        // }
+        const role = userRegisterDto.Role;
+        delete userRegisterDto.Role;
+        const user = this.userRepository.create({
+            ...userRegisterDto,
+            avatar,
+            role: RoleType[role],
+        });
 
         return this.userRepository.save(user);
     }
