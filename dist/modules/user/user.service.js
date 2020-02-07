@@ -24,7 +24,7 @@ const validator_service_1 = require("../../shared/services/validator.service");
 const aws_s3_service_1 = require("../../shared/services/aws-s3.service");
 const PageMetaDto_1 = require("../../common/dto/PageMetaDto");
 const users_page_dto_1 = require("./dto/users-page.dto");
-const role_type_1 = require("common/constants/role-type");
+const role_type_1 = require("../../common/constants/role-type");
 let UserService = class UserService {
     constructor(userRepository, validatorService, awsS3Service) {
         this.userRepository = userRepository;

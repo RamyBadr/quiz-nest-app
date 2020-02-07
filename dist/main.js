@@ -58,7 +58,7 @@ function bootstrap() {
             },
         });
         yield app.startAllMicroservicesAsync();
-        if (['development', 'staging'].includes(configService.nodeEnv)) {
+        if (['development', 'staging', 'production'].includes(configService.nodeEnv)) {
             viveo_swagger_1.setupSwagger(app);
         }
         const port = configService.getNumber('PORT');
