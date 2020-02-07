@@ -15,7 +15,7 @@ const math_module_1 = require("./modules/math/math.module");
 const user_module_1 = require("./modules/user/user.module");
 const config_service_1 = require("./shared/services/config.service");
 const shared_module_1 = require("./shared/shared.module");
-const quiz_module_1 = require("modules/quiz/quiz.module");
+const quiz_module_1 = require("./modules/quiz/quiz.module");
 let AppModule = class AppModule {
     configure(consumer) {
         consumer.apply(middlewares_1.contextMiddleware).forRoutes('*');
