@@ -27,7 +27,7 @@ __decorate([
     __metadata("design:type", microservices_1.ClientProxy)
 ], MathController.prototype, "client", void 0);
 __decorate([
-    common_1.Get('sum'),
+    common_1.Get(''),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", rxjs_1.Observable)
@@ -39,7 +39,7 @@ __decorate([
     __metadata("design:returntype", Number)
 ], MathController.prototype, "sum", null);
 MathController = __decorate([
-    common_1.Controller('math')
+    common_1.Controller('')
 ], MathController);
 exports.MathController = MathController;
 //# sourceMappingURL=math.controller.js.map

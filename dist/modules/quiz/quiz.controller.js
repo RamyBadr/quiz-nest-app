@@ -24,58 +24,61 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const common_1 = require("@nestjs/common");
 const swagger_1 = require("@nestjs/swagger");
 const role_type_1 = require("../../common/constants/role-type");
-const auth_user_decorator_1 = require("../../decorators/auth-user.decorator");
 const roles_decorator_1 = require("../../decorators/roles.decorator");
 const auth_guard_1 = require("../../guards/auth.guard");
 const roles_guard_1 = require("../../guards/roles.guard");
+const quizs_page_options_dto_1 = require("./dto/quizs-page-options.dto");
+const quizs_page_dto_1 = require("./dto/quizs-page.dto");
+const quiz_service_1 = require("./quiz.service");
 const auth_user_interceptor_service_1 = require("../../interceptors/auth-user-interceptor.service");
-const users_page_options_dto_1 = require("./dto/users-page-options.dto");
-const users_page_dto_1 = require("./dto/users-page.dto");
-const user_entity_1 = require("./user.entity");
-const user_service_1 = require("./user.service");
-let UserController = class UserController {
-    constructor(_userService) {
-        this._userService = _userService;
+const QuizDto_1 = require("./dto/QuizDto");
+let QuizController = class QuizController {
+    constructor(_quizService) {
+        this._quizService = _quizService;
     }
-    admin(user) {
+    createQuiz(quizDto) {
         return __awaiter(this, void 0, void 0, function* () {
-            return 'only for you admin: ' + user.firstName;
+            const createdQuiz = yield this._quizService.createQuiz(quizDto);
+            return createdQuiz.toDto();
         });
     }
-    getUsers(pageOptionsDto) {
-        return this._userService.getUsers(pageOptionsDto);
+    getQuizs(pageOptionsDto) {
+        return this._quizService.getQuizs(pageOptionsDto);
     }
 };
 __decorate([
-    common_1.Get('admin'),
-    roles_decorator_1.Roles(role_type_1.RoleType.User, role_type_1.RoleType.Admin),
+    common_1.Post(''),
     common_1.HttpCode(common_1.HttpStatus.OK),
-    __param(0, auth_user_decorator_1.AuthUser()),
+    common_1.UseGuards(auth_guard_1.AuthGuard),
+    roles_decorator_1.Roles(role_type_1.RoleType.Teacher),
+    common_1.UseInterceptors(auth_user_interceptor_service_1.AuthUserInterceptor),
+    swagger_1.ApiBearerAuth(),
+    swagger_1.ApiOkResponse({ type: QuizDto_1.QuizDto, description: 'Successfully created' }),
+    __param(0, common_1.Body()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [user_entity_1.UserEntity]),
+    __metadata("design:paramtypes", [QuizDto_1.QuizDto]),
     __metadata("design:returntype", Promise)
-], UserController.prototype, "admin", null);
+], QuizController.prototype, "createQuiz", null);
 __decorate([
-    common_1.Get('users'),
-    roles_decorator_1.Roles(role_type_1.RoleType.Admin),
+    common_1.Get('quizs'),
     common_1.HttpCode(common_1.HttpStatus.OK),
     swagger_1.ApiResponse({
         status: common_1.HttpStatus.OK,
-        description: 'Get users list',
-        type: users_page_dto_1.UsersPageDto,
+        description: 'Get quizs list',
+        type: quizs_page_dto_1.QuizsPageDto,
     }),
     __param(0, common_1.Query(new common_1.ValidationPipe({ transform: true }))),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [users_page_options_dto_1.UsersPageOptionsDto]),
+    __metadata("design:paramtypes", [quizs_page_options_dto_1.QuizsPageOptionsDto]),
     __metadata("design:returntype", Promise)
-], UserController.prototype, "getUsers", null);
-UserController = __decorate([
-    common_1.Controller('users'),
-    swagger_1.ApiUseTags('users'),
+], QuizController.prototype, "getQuizs", null);
+QuizController = __decorate([
+    common_1.Controller('quizs'),
+    swagger_1.ApiUseTags('quizs'),
     common_1.UseGuards(auth_guard_1.AuthGuard, roles_guard_1.RolesGuard),
     common_1.UseInterceptors(auth_user_interceptor_service_1.AuthUserInterceptor),
     swagger_1.ApiBearerAuth(),
-    __metadata("design:paramtypes", [user_service_1.UserService])
-], UserController);
-exports.UserController = UserController;
-//# sourceMappingURL=user.controller.js.map
+    __metadata("design:paramtypes", [quiz_service_1.QuizService])
+], QuizController);
+exports.QuizController = QuizController;
+//# sourceMappingURL=quiz.controller.js.map

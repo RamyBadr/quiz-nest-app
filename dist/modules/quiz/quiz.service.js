@@ -19,64 +19,46 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const common_1 = require("@nestjs/common");
-const user_repository_1 = require("./user.repository");
+const quiz_repository_1 = require("./quiz.repository");
 const validator_service_1 = require("../../shared/services/validator.service");
 const aws_s3_service_1 = require("../../shared/services/aws-s3.service");
 const PageMetaDto_1 = require("../../common/dto/PageMetaDto");
-const users_page_dto_1 = require("./dto/users-page.dto");
-const role_type_1 = require("common/constants/role-type");
-let UserService = class UserService {
-    constructor(userRepository, validatorService, awsS3Service) {
-        this.userRepository = userRepository;
+const quizs_page_dto_1 = require("./dto/quizs-page.dto");
+let QuizService = class QuizService {
+    constructor(quizRepository, validatorService, awsS3Service) {
+        this.quizRepository = quizRepository;
         this.validatorService = validatorService;
         this.awsS3Service = awsS3Service;
     }
     findOne(findData) {
-        return this.userRepository.findOne(findData);
+        return this.quizRepository.findOne(findData);
     }
-    findByUsernameOrEmail(options) {
+    createQuiz(quizDto) {
         return __awaiter(this, void 0, void 0, function* () {
-            const queryBuilder = this.userRepository.createQueryBuilder('user');
-            if (options.email) {
-                queryBuilder.orWhere('user.email = :email', {
-                    email: options.email,
-                });
-            }
-            if (options.username) {
-                queryBuilder.orWhere('user.username = :username', {
-                    username: options.username,
-                });
-            }
-            return queryBuilder.getOne();
+            const quiz = this.quizRepository.create(Object.assign({}, quizDto));
+            return this.quizRepository.save(quiz);
         });
     }
-    createUser(userRegisterDto) {
+    getQuizs(pageOptionsDto) {
         return __awaiter(this, void 0, void 0, function* () {
-            let avatar;
-            const user = this.userRepository.create(Object.assign(Object.assign({}, userRegisterDto), { avatar, role: role_type_1.RoleType[userRegisterDto.role] }));
-            return this.userRepository.save(user);
-        });
-    }
-    getUsers(pageOptionsDto) {
-        return __awaiter(this, void 0, void 0, function* () {
-            const queryBuilder = this.userRepository.createQueryBuilder('user');
-            const [users, usersCount] = yield queryBuilder
+            const queryBuilder = this.quizRepository.createQueryBuilder('quiz');
+            const [quizs, quizsCount] = yield queryBuilder
                 .skip(pageOptionsDto.skip)
                 .take(pageOptionsDto.take)
                 .getManyAndCount();
             const pageMetaDto = new PageMetaDto_1.PageMetaDto({
                 pageOptionsDto,
-                itemCount: usersCount,
+                itemCount: quizsCount,
             });
-            return new users_page_dto_1.UsersPageDto(users.toDtos(), pageMetaDto);
+            return new quizs_page_dto_1.QuizsPageDto(quizs.toDtos(), pageMetaDto);
         });
     }
 };
-UserService = __decorate([
+QuizService = __decorate([
     common_1.Injectable(),
-    __metadata("design:paramtypes", [user_repository_1.UserRepository,
+    __metadata("design:paramtypes", [quiz_repository_1.QuizRepository,
         validator_service_1.ValidatorService,
         aws_s3_service_1.AwsS3Service])
-], UserService);
-exports.UserService = UserService;
-//# sourceMappingURL=user.service.js.map
+], QuizService);
+exports.QuizService = QuizService;
+//# sourceMappingURL=quiz.service.js.map
