@@ -61,10 +61,7 @@ export class AuthController {
         @Body() userRegisterDto: UserRegisterDto,
         // @UploadedFile() file: IFile,
     ): Promise<UserDto> {
-        const createdUser = await this.userService.createUser(
-            userRegisterDto,
-            // null,
-        );
+        const createdUser = await this.userService.createUser(userRegisterDto);
         return createdUser.toDto();
     }
 

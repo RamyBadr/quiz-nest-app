@@ -50,22 +50,10 @@ export class UserService {
         // file: IFile,
     ): Promise<UserEntity> {
         let avatar: string;
-        // if (file && !this.validatorService.isImage(file.mimetype)) {
-        //     throw new FileNotImageException();
-        // }
-
-        // if (file) {
-        //     avatar = await this.awsS3Service.uploadImage(file);
-        // }
-        // if(userRegisterDto.role){
-        //   userRegisterDto.role = RoleType.Admin ;
-        // }
-        const role = userRegisterDto.Role;
-        delete userRegisterDto.Role;
         const user = this.userRepository.create({
             ...userRegisterDto,
             avatar,
-            role: RoleType[role],
+            role: (<any>RoleType)[userRegisterDto.role],
         });
 
         return this.userRepository.save(user);
