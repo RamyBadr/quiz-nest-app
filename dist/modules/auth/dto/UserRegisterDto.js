@@ -35,6 +35,13 @@ __decorate([
 ], UserRegisterDto.prototype, "email", void 0);
 __decorate([
     class_validator_1.IsString(),
+    class_validator_1.IsIn(['User', 'Teacher']),
+    class_validator_1.IsNotEmpty(),
+    swagger_1.ApiModelProperty({}),
+    __metadata("design:type", String)
+], UserRegisterDto.prototype, "role", void 0);
+__decorate([
+    class_validator_1.IsString(),
     class_validator_1.MinLength(6),
     swagger_1.ApiModelProperty({ minLength: 6 }),
     __metadata("design:type", String)

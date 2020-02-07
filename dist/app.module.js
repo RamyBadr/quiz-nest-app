@@ -15,6 +15,7 @@ const math_module_1 = require("./modules/math/math.module");
 const user_module_1 = require("./modules/user/user.module");
 const config_service_1 = require("./shared/services/config.service");
 const shared_module_1 = require("./shared/shared.module");
+const quiz_module_1 = require("modules/quiz/quiz.module");
 let AppModule = class AppModule {
     configure(consumer) {
         consumer.apply(middlewares_1.contextMiddleware).forRoutes('*');
@@ -26,6 +27,7 @@ AppModule = __decorate([
             auth_module_1.AuthModule,
             user_module_1.UserModule,
             math_module_1.MathModule,
+            quiz_module_1.QuizModule,
             typeorm_1.TypeOrmModule.forRootAsync({
                 imports: [shared_module_1.SharedModule],
                 useFactory: (configService) => configService.typeOrmConfig,

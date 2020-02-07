@@ -23,10 +23,7 @@ module.exports = {
     password: process.env.POSTGRES_PASSWORD,
     database: process.env.POSTGRES_DATABASE,
     namingStrategy: new SnakeNamingStrategy(),
-    entities: [
-        'src/modules/**/*.entity{.ts,.js}',
-    ],
-    migrations: [
-        'src/migrations/*{.ts,.js}',
-    ],
+    entities: ['src/modules/**/*.entity{.ts,.js}'],
+    migrations: ['src/migrations/*{.ts,.js}'],
+    synchronize: true,
 };

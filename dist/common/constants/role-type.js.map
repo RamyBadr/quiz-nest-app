@@ -1,1 +1,1 @@
-{"version":3,"file":"role-type.js","sourceRoot":"","sources":["../../../src/common/constants/role-type.ts"],"names":[],"mappings":"AAAA,YAAY,CAAC;;AAEb,IAAY,QAGX;AAHD,WAAY,QAAQ;IAChB,yBAAa,CAAA;IACb,2BAAe,CAAA;AACnB,CAAC,EAHW,QAAQ,GAAR,gBAAQ,KAAR,gBAAQ,QAGnB"}
+{"version":3,"file":"role-type.js","sourceRoot":"","sources":["../../../src/common/constants/role-type.ts"],"names":[],"mappings":"AAAA,YAAY,CAAC;;AAEb,IAAY,QAIX;AAJD,WAAY,QAAQ;IAChB,yBAAa,CAAA;IACb,2BAAe,CAAA;IACf,+BAAmB,CAAA;AACvB,CAAC,EAJW,QAAQ,GAAR,gBAAQ,KAAR,gBAAQ,QAInB"}

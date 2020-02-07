@@ -9,12 +9,14 @@ import { MathModule } from './modules/math/math.module';
 import { UserModule } from './modules/user/user.module';
 import { ConfigService } from './shared/services/config.service';
 import { SharedModule } from './shared/shared.module';
+import { QuizModule } from 'modules/quiz/quiz.module';
 
 @Module({
     imports: [
         AuthModule,
         UserModule,
         MathModule,
+        QuizModule,
         TypeOrmModule.forRootAsync({
             imports: [SharedModule],
             useFactory: (configService: ConfigService) =>

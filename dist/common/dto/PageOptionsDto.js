@@ -27,6 +27,7 @@ __decorate([
     swagger_1.ApiModelPropertyOptional({
         enum: order_1.Order,
         default: order_1.Order.ASC,
+        description: 'ASC,DESC',
     }),
     class_validator_1.IsEnum(order_1.Order),
     class_validator_1.IsOptional(),

@@ -10,6 +10,7 @@ import { AwsS3Service } from '../../shared/services/aws-s3.service';
 import { UsersPageOptionsDto } from './dto/users-page-options.dto';
 import { PageMetaDto } from '../../common/dto/PageMetaDto';
 import { UsersPageDto } from './dto/users-page.dto';
+import { RoleType } from 'common/constants/role-type';
 
 @Injectable()
 export class UserService {
@@ -49,15 +50,11 @@ export class UserService {
         // file: IFile,
     ): Promise<UserEntity> {
         let avatar: string;
-        // if (file && !this.validatorService.isImage(file.mimetype)) {
-        //     throw new FileNotImageException();
-        // }
-
-        // if (file) {
-        //     avatar = await this.awsS3Service.uploadImage(file);
-        // }
-
-        const user = this.userRepository.create({ ...userRegisterDto, avatar });
+        const user = this.userRepository.create({
+            ...userRegisterDto,
+            avatar,
+            role: (<any>RoleType)[userRegisterDto.role],
+        });
 
         return this.userRepository.save(user);
     }

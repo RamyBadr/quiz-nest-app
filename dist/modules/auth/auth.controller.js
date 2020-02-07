@@ -46,9 +46,9 @@ let AuthController = class AuthController {
             return new LoginPayloadDto_1.LoginPayloadDto(userEntity.toDto(), token);
         });
     }
-    userRegister(userRegisterDto, file) {
+    userRegister(userRegisterDto) {
         return __awaiter(this, void 0, void 0, function* () {
-            const createdUser = yield this.userService.createUser(userRegisterDto, file);
+            const createdUser = yield this.userService.createUser(userRegisterDto);
             return createdUser.toDto();
         });
     }
@@ -72,12 +72,10 @@ __decorate([
     common_1.Post('register'),
     common_1.HttpCode(common_1.HttpStatus.OK),
     swagger_1.ApiOkResponse({ type: UserDto_1.UserDto, description: 'Successfully Registered' }),
-    swagger_1.ApiImplicitFile({ name: 'avatar', required: true }),
     common_1.UseInterceptors(platform_express_1.FileInterceptor('avatar')),
     __param(0, common_1.Body()),
-    __param(1, common_1.UploadedFile()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [UserRegisterDto_1.UserRegisterDto, Object]),
+    __metadata("design:paramtypes", [UserRegisterDto_1.UserRegisterDto]),
     __metadata("design:returntype", Promise)
 ], AuthController.prototype, "userRegister", null);
 __decorate([
