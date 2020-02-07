@@ -10,7 +10,7 @@ import { AwsS3Service } from '../../shared/services/aws-s3.service';
 import { UsersPageOptionsDto } from './dto/users-page-options.dto';
 import { PageMetaDto } from '../../common/dto/PageMetaDto';
 import { UsersPageDto } from './dto/users-page.dto';
-import { RoleType } from 'common/constants/role-type';
+import { RoleType } from '../../common/constants/role-type';
 
 @Injectable()
 export class UserService {
