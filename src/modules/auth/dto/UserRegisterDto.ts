@@ -30,10 +30,10 @@ export class UserRegisterDto {
     readonly email: string;
 
     @IsString()
-    @IsIn(['USER', 'TEACHER'])
+    @IsIn(['User', 'Teacher'])
     @IsNotEmpty()
     @ApiModelProperty({})
-    Role: string;
+    role: string;
 
     @IsString()
     @MinLength(6)
