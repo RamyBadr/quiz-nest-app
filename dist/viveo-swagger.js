@@ -6,6 +6,7 @@ function setupSwagger(app) {
         .setTitle('API')
         .setVersion('0.0.1')
         .addBearerAuth()
+        .setSchemes('http', 'https')
         .build();
     const document = swagger_1.SwaggerModule.createDocument(app, options);
     swagger_1.SwaggerModule.setup('documentation', app, document);
