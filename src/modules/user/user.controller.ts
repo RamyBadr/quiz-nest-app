@@ -25,9 +25,9 @@ import { UserService } from './user.service';
 
 @Controller('users')
 @ApiUseTags('users')
-@UseGuards(AuthGuard, RolesGuard)
-@UseInterceptors(AuthUserInterceptor)
-@ApiBearerAuth()
+// @UseGuards(AuthGuard, RolesGuard)
+// @UseInterceptors(AuthUserInterceptor)
+// @ApiBearerAuth()
 export class UserController {
     constructor(private _userService: UserService) {}
 
@@ -39,7 +39,7 @@ export class UserController {
     }
 
     @Get('users')
-    @Roles(RoleType.Admin)
+    // @Roles(RoleType.Admin)
     @HttpCode(HttpStatus.OK)
     @ApiResponse({
         status: HttpStatus.OK,
