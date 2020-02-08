@@ -1,28 +1,23 @@
 'use strict';
 
-import { ApiModelPropertyOptional } from '@nestjs/swagger';
+import { ApiModelPropertyOptional, ApiModelProperty } from '@nestjs/swagger';
 import { AbstractDto } from '../../../common/dto/AbstractDto';
 import { QuizEntity } from '../quiz.entity';
 
 export class QuizDto extends AbstractDto {
-    @ApiModelPropertyOptional()
+    @ApiModelProperty()
     title: string;
 
-    @ApiModelPropertyOptional()
+    @ApiModelProperty()
     ispublished: boolean;
 
-    @ApiModelPropertyOptional()
-    email: string;
-
-    @ApiModelPropertyOptional()
-    avatar: string;
-
-    @ApiModelPropertyOptional()
-    phone: string;
+    @ApiModelProperty()
+    authorId: string;
 
     constructor(quiz: QuizEntity) {
         super(quiz);
         this.title = quiz.title;
         this.ispublished = quiz.ispublished;
+        this.authorId = quiz.authorId;
     }
 }

@@ -3,12 +3,14 @@ import { Entity, Column } from 'typeorm';
 import { AbstractEntity } from '../../common/abstract.entity';
 import { QuizDto } from './dto/QuizDto';
 
-@Entity({ name: 'quizs' })
+@Entity({ name: 'quizes' })
 export class QuizEntity extends AbstractEntity<QuizDto> {
-    @Column({ nullable: true })
+    @Column({ nullable: false })
     title: string;
-
-    @Column({ nullable: true })
+    @Column({ nullable: false })
     ispublished: boolean;
+    @Column({ nullable: false })
+    authorId: string;
+
     dtoClass = QuizDto;
 }
