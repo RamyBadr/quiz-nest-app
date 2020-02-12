@@ -11,6 +11,7 @@ import { UsersPageOptionsDto } from './dto/users-page-options.dto';
 import { PageMetaDto } from '../../common/dto/PageMetaDto';
 import { UsersPageDto } from './dto/users-page.dto';
 import { RoleType } from '../../common/constants/role-type';
+import { UserFilterDto } from './dto/UserFilterDto';
 
 @Injectable()
 export class UserService {
@@ -61,9 +62,14 @@ export class UserService {
 
     async getUsers(pageOptionsDto: UsersPageOptionsDto): Promise<UsersPageDto> {
         const queryBuilder = this.userRepository.createQueryBuilder('user');
+        const filter = new UserFilterDto();
+        if (pageOptionsDto.role) {
+            filter.role = (<any>RoleType)[pageOptionsDto.role];
+        }
         const [users, usersCount] = await queryBuilder
             .skip(pageOptionsDto.skip)
             .take(pageOptionsDto.take)
+            .where(filter)
             .getManyAndCount();
 
         const pageMetaDto = new PageMetaDto({

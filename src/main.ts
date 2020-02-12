@@ -76,7 +76,7 @@ async function bootstrap() {
     if (
         ['development', 'staging', 'production'].includes(configService.nodeEnv)
     ) {
-        setupSwagger(app);
+        setupSwagger(app, configService.nodeEnv);
     }
 
     const port = configService.getNumber('PORT');

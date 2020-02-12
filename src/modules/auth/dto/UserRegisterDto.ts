@@ -11,6 +11,7 @@ import {
 } from 'class-validator';
 import { ApiModelProperty } from '@nestjs/swagger';
 import { Column } from 'typeorm';
+import { RoleTypeRigester } from '../../../common/constants/role-type-register';
 
 export class UserRegisterDto {
     @IsString()
@@ -29,11 +30,13 @@ export class UserRegisterDto {
     @ApiModelProperty()
     readonly email: string;
 
-    @IsString()
-    @IsIn(['User', 'Teacher'])
-    @IsNotEmpty()
-    @ApiModelProperty({})
-    role: string;
+    @ApiModelProperty({
+        enum: Object.keys(RoleTypeRigester),
+        default: 'User',
+        description: 'user role',
+    })
+    @IsOptional()
+    role: string = 'User';
 
     @IsString()
     @MinLength(6)

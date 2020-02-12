@@ -1,28 +1,36 @@
 'use strict';
 
-import { ApiModelPropertyOptional } from '@nestjs/swagger';
+import { ApiModelPropertyOptional, ApiModelProperty } from '@nestjs/swagger';
 import { AbstractDto } from '../../../common/dto/AbstractDto';
 import { QuizEntity } from '../quiz.entity';
+import { UserData } from 'aws-sdk/clients/ec2';
+import { UserDto } from '../../user/dto/UserDto';
+import { QuestionDto } from '../../question/dto/QuestionDto';
+import { RoleType } from 'aws-sdk/clients/cognitoidentity';
 
 export class QuizDto extends AbstractDto {
-    @ApiModelPropertyOptional()
+    @ApiModelProperty()
     title: string;
 
-    @ApiModelPropertyOptional()
+    @ApiModelProperty()
     ispublished: boolean;
 
-    @ApiModelPropertyOptional()
-    email: string;
+    @ApiModelProperty()
+    author: UserDto;
 
-    @ApiModelPropertyOptional()
-    avatar: string;
+    @ApiModelProperty()
+    questions: QuestionDto[];
 
-    @ApiModelPropertyOptional()
-    phone: string;
-
-    constructor(quiz: QuizEntity) {
-        super(quiz);
-        this.title = quiz.title;
-        this.ispublished = quiz.ispublished;
+    role: RoleType;
+    constructor(quizEntity: QuizEntity) {
+        super(quizEntity);
+        this.title = quizEntity.title;
+        this.ispublished = quizEntity.ispublished;
+        if (quizEntity.author) {
+            this.author = quizEntity.author.toDto();
+        }
+        if (quizEntity.questions) {
+            this.questions = quizEntity.questions.toDtos();
+        }
     }
 }

@@ -56,7 +56,7 @@ export class AuthController {
     @HttpCode(HttpStatus.OK)
     @ApiOkResponse({ type: UserDto, description: 'Successfully Registered' })
     // @ApiImplicitFile({ name: 'avatar', required: true })
-    @UseInterceptors(FileInterceptor('avatar'))
+    // @UseInterceptors(FileInterceptor('avatar'))
     async userRegister(
         @Body() userRegisterDto: UserRegisterDto,
         // @UploadedFile() file: IFile,

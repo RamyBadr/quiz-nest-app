@@ -1,9 +1,10 @@
-import { Entity, Column } from 'typeorm';
+import { Entity, Column, OneToMany } from 'typeorm';
 
 import { AbstractEntity } from '../../common/abstract.entity';
 import { RoleType } from '../../common/constants/role-type';
 import { UserDto } from './dto/UserDto';
 import { PasswordTransformer } from './password.transformer';
+import { QuizEntity } from '../quiz/quiz.entity';
 
 @Entity({ name: 'users' })
 export class UserEntity extends AbstractEntity<UserDto> {
@@ -27,6 +28,12 @@ export class UserEntity extends AbstractEntity<UserDto> {
 
     @Column({ nullable: true })
     avatar: string;
+
+    @OneToMany(
+        type => QuizEntity,
+        quiz => quiz.author,
+    )
+    quizes: [QuizEntity];
 
     dtoClass = UserDto;
 }
