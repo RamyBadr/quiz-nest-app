@@ -10,6 +10,9 @@ import { STATUS_CODES } from 'http';
 import { QueryFailedError } from 'typeorm';
 
 import { ConstraintErrors } from './constraint-errors';
+function postgresExceptionToHttpStatus(exception: any): HttpStatus {
+    return HttpStatus.INTERNAL_SERVER_ERROR;
+}
 
 @Catch(QueryFailedError)
 export class QueryFailedFilter implements ExceptionFilter {
@@ -21,10 +24,13 @@ export class QueryFailedFilter implements ExceptionFilter {
 
         const errorMessage = ConstraintErrors[exception.constraint];
 
-        const status =
-            exception.constraint && exception.constraint.startsWith('UQ')
+        const status = exception.constraint
+            ? exception.constraint.startsWith('UQ') || exception.code == '23505'
                 ? HttpStatus.CONFLICT
-                : HttpStatus.INTERNAL_SERVER_ERROR;
+                : exception.constraint.startsWith('FK')
+                ? HttpStatus.NOT_FOUND
+                : HttpStatus.INTERNAL_SERVER_ERROR
+            : HttpStatus.INTERNAL_SERVER_ERROR;
 
         response.status(status).json({
             statusCode: status,

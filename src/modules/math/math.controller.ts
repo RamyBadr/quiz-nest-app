@@ -14,13 +14,17 @@ export class MathController {
 
     @Get('')
     call(): Observable<string> {
-        const pattern = { cmd: 'sum' };
+        const pattern = { cmd: 'hello' };
         const data = [1, 2, 3, 4, 5];
         return this.client.send<string>(pattern, data);
     }
 
-    @MessagePattern({ cmd: 'sum' })
-    sum(data: number[]): number {
-        return (data || []).reduce((a, b) => a + b);
+    @MessagePattern({ cmd: 'hello' })
+    hello(): string {
+        return 'hello world';
     }
+
+    // sum(data: number[]): number {
+    //     return (data || []).reduce((a, b) => a + b);
+    // }
 }

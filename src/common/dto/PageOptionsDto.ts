@@ -20,7 +20,7 @@ export class PageOptionsDto {
     })
     @IsEnum(Order)
     @IsOptional()
-    readonly order: Order = Order.ASC;
+    readonly order: Order = Order.DESC;
 
     @ApiModelPropertyOptional({
         minimum: 1,
@@ -48,9 +48,9 @@ export class PageOptionsDto {
         return (this.page - 1) * this.take;
     }
 
-    @ApiModelPropertyOptional()
-    @IsString()
-    @IsNotEmpty()
-    @IsOptional()
-    readonly q?: string;
+    // @ApiModelPropertyOptional()
+    // @IsString()
+    // @IsNotEmpty()
+    // @IsOptional()
+    // readonly q?: string;
 }
